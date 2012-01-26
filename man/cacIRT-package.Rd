@@ -12,17 +12,17 @@ Computes classification accuracy and consistency under Item Response Theory by t
 \tabular{ll}{
 Package: \tab cacIRT\cr
 Type: \tab Package\cr
-Version: \tab 1.0\cr
-Date: \tab 2011-09-05\cr
+Version: \tab 1.1\cr
+Date: \tab 2011-01-26\cr
 License: \tab GPL (>= 2)\cr
 LazyLoad: \tab yes\cr
 }
-This packages computes classification accuracy and consistency with two recent approaches proposed by Lee, Hanson & Brennan (2002) and Lee (2010) or by Rudner (2001, 2005). The two functions class.Lee() and class.Rud() are the wrapper functions for the respective approaches. They can accept a range of inputs: ability estimates, quadrature points, or response data matrix and item parameters. Marginal indices are computed with either the D or P method (see Lee (2010)).
+This packages computes classification accuracy and consistency with two recent approaches proposed by Lee, Hanson & Brennan (2002) and Lee (2010) or by Rudner (2001, 2005), for dichotomous IRT models. The two functions \code{class.Lee} and \code{class.Rud} are the wrapper functions for the respective approaches. They can accept a range of inputs: ability estimates, quadrature points, or response data matrix and item parameters. Marginal indices are computed with either the D or P method (see Lee (2010)).
 }
 \author{
 Quinn Lathrop
 
-Maintainer: <qlathrop@nd.edu>
+Maintainer: <qlathrop @ nd.edu>
 
 }
 \references{
@@ -35,7 +35,9 @@ Rudner, L. M. (2001) Computing the expected proportions of misclassified examine
 Rudner, L. M. (2005) Expected classification accuracy. Practical Assessment Research & Evaluation, \bold{10(13)}, 1--4.
 
 }
-\keyword{ package }
+\keyword{~Item Response Theory}
+\keyword{~IRT}
+\keyword{~Classification}
 \seealso{
 }
 \examples{

@@ -2,10 +2,10 @@
 \alias{TOtable.F}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Classification table for computing True accuracy or consistency
+A general classification table for computing True accuracy or consistency
 }
 \description{
-Creates a 2x2 table (for a single cut score), to compute the proportion of correctly classified, or consistently classified, subjects.  Code is already generalized to simultaneous multiple cut offs}
+Creates a 2x2 table (or larger for multiple cutscores), to compute the proportion of correctly classified, or consistently classified, subjects.   Can easily be modified to return kappa if needed.}
 \usage{
 TOtable.F(theta, os, theta.cutoff, os.cutoff)
 }
@@ -25,14 +25,14 @@ the cut score on the same scale as the scores given in os
 }
 }
 \details{
-The cut scores need to be on the same scale as their subject scores, but do not need to match each other. For example, we had one test scored with theta.hat and a theta scaled cutoff, and the second score on total score and a number correct cutoff.
+The cut scores need to be on the same scale as their subjects' scores, but do not need to match each other. For example, one test scored with theta.hat and a theta scaled cutoff, and the second scored on total score and a number correct cutoff. See example.
 }
 \value{
 %%  ~Describe the value returned
 %%  If it is a LIST, use
-\item{comp1 }{classification table}
-\item{comp2 }{P or proportion of subject on the diagonal}
-%% ...
+\item{Table}{classification table with margins}
+\item{P}{P or proportion of subjects on the diagonal, raw accuracy/consistency}
+%% 
 }
 \references{
 %% ~put references to the literature/web site here ~
@@ -65,5 +65,5 @@ This is useful in simulation studies when we have unknowable knowledge, either a
 TOtable.F(theta, theta.hat, t.cut, t.cut)$P
 TOtable.F(theta, total.score, t.cut, x.cut)$P 
 
-# for 1PL model total score is sufficient for theta.hat, repeat with 2PL or 3PL items...
+# for 1PL model total score is sufficient for theta.hat, repeat with 2PL or 3PL items to see effect of classifying on theta.hat instead of total score
 }
