@@ -9,13 +9,13 @@ Computes classification accuracy and consistency with Lee's approach.
 }
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
-Computes classification accuracy and consistency with Lee's approach. Basically, the probability of each possible total score conditional on ability is found with a recursive algorithm (see \code{recursive.raw}). Those probabilities are grouped according to the cut scores and used to estimate the indices. See references for details.
+Computes classification accuracy and consistency with Lee's approach. The probability of each possible total score conditional on ability is found with  \code{recursive.raw}. Those probabilities are grouped according to the cut scores and used to estimate the indices. See references or code for details.
 
 }
 \usage{
-class.Lee(cutscore, ip, ability = NULL, rdm = NULL, quadrature = NULL)
-Lee.D(cutscore, quadrature, ip)
-Lee.P(cutscore, theta, ip)
+class.Lee(cutscore, ip, ability = NULL, rdm = NULL, quadrature = NULL, D = 1.7)
+Lee.D(cutscore, quadrature, ip, D = 1.7)
+Lee.P(cutscore, theta, ip, D = 1.7)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -39,6 +39,10 @@ The response data matrix with rows as subjects and columns as items
 %%     ~~Describe \code{quadrature} here~~
 A list containing 1) The quadrature points and 2) Their corresponding weights
 }
+
+\item{D}{
+Scaling constant for IRT parameters, defaults to 1.7, alternatively often set to 1.
+}
  
 }
 \details{
@@ -48,7 +52,7 @@ A list containing 1) The quadrature points and 2) Their corresponding weights
 \value{
 %%  ~Describe the value returned
 %%  If it is a LIST, use
-\item{Marginal }{A matrix with two columns of marginal accuracy and consistency per cut score and/or simultaneous}
+\item{Marginal }{A matrix with two columns of marginal accuracy and consistency per cut score (and simultaneous if multiple cutscores are given)}
 \item{Conditional}{A matrix of conditional accuracy and conditional consistency returned in the order of subjects if ability or rdm is given}
 %% ...
 }
@@ -60,17 +64,15 @@ Lee, W. (2010) Classification consistency and accuracy for complex assessments u
 \author{
 Quinn Lathrop}
 \note{
-To expand the code  to other IRT models or to estimate classification indices for weighted total score, the code within Lee.P or Lee.D needs to be modified. Also the recursive algorithm recursive.raw() will need to be adapted for polytomous IRT models.
+In order to score above a cut, an examinee must score at or above the cut score. Since we are working on the total score scale, be aware that if a cut score is given with a decimal (like 2.4), the examinee must have a total score at the next integer or more (so 3 or more) to score above the cut.
 }
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
-\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
-}
+
 \examples{
 ##from rdm, item parameters denote 4 item 1PL test, cut score at x=2
-##only return marginal indices
+##only print marginal indices
 
 params<-matrix(c(1,1,1,1,-2,1,0,1,0,0,0,0),4,3)
 rdm<-sim(params, rnorm(100))
@@ -81,7 +83,7 @@ class.Lee(2, params, rdm = rdm)$Marginal
 
 quad <- normal.qu(40)
 
-class.Lee(c(2,3), params, quadrature = quad)$Marginal
+class.Lee(c(2,3), params, quadrature = quad, D = 1)$Marginal
 
 
 }

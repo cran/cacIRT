@@ -1,5 +1,5 @@
 Lee.D <-
-function(cutscore,quadrature,ip){
+function(cutscore, quadrature, ip, D = 1.7){
 	
 			ut<-quadrature[[1]]
 			we <- quadrature[[2]]
@@ -11,7 +11,7 @@ function(cutscore,quadrature,ip){
 			nc <- length(cutscore)
 			
 			exp.TS <- rowSums(sapply(1:ni, function(i) ip[i,3] + 
-							(1 - ip[i,3])/(1 + exp(-1.7*ip[i, 1] * 
+							(1 - ip[i,3])/(1 + exp(-D*ip[i, 1] * 
 							(ut-ip[i, 2])))))   
 	
 	rec.mat <- recursive.raw(ut,ip)
@@ -43,7 +43,7 @@ function(cutscore,quadrature,ip){
 				bang<-ceiling(cuts)
 				rec.s <- list(NA)
 					for(i in 1:(nc+1)){
-				rec.s[[i]] <- as.matrix(rec.mat[ , (cuts[i]+1):cuts[i+1]])}
+				rec.s[[i]] <- as.matrix(rec.mat[ , (bang[i]+1):bang[i+1]])}
 				
 				for(i in 1:nn){
 			simul[i,1]<- sum(rec.s[[categ[i]]][i,])}

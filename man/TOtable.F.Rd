@@ -5,7 +5,7 @@
 A general classification table for computing True accuracy or consistency
 }
 \description{
-Creates a 2x2 table (or larger for multiple cutscores), to compute the proportion of correctly classified, or consistently classified, subjects.   Can easily be modified to return kappa if needed.}
+Creates a 2x2 table (or larger for multiple cutscores), to compute the proportion of correctly classified, or consistently classified, subjects.   Can easily be modified to return kappa or other summaries as needed.}
 \usage{
 TOtable.F(theta, os, theta.cutoff, os.cutoff)
 }
@@ -25,7 +25,7 @@ the cut score on the same scale as the scores given in os
 }
 }
 \details{
-The cut scores need to be on the same scale as their subjects' scores, but do not need to match each other. For example, one test scored with theta.hat and a theta scaled cutoff, and the second scored on total score and a number correct cutoff. See example.
+The cut scores need to be on the same scale as their subjects' scores, but do not need to match each other. For example, one test scored with theta.hat and a theta scaled cut score, and the second scored on total score and a number correct cut score. See example.
 }
 \value{
 %%  ~Describe the value returned
@@ -34,20 +34,16 @@ The cut scores need to be on the same scale as their subjects' scores, but do no
 \item{P}{P or proportion of subjects on the diagonal, raw accuracy/consistency}
 %% 
 }
-\references{
-%% ~put references to the literature/web site here ~
-}
+
 \author{
 Quinn Lathrop}
 \note{
-This is useful in simulation studies when we have unknowable knowledge, either a second test (for consistency), or True scores or Theta (not theta.hat) (for accuracy).
+This is useful in simulation studies when we have usually unknowable knowledge, either a second test (for consistency), or True scores or Theta (for accuracy).
 }
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
-\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
-}
+
 \examples{
 
 ##with simple 4 item 1PL simulated test:
@@ -65,5 +61,7 @@ This is useful in simulation studies when we have unknowable knowledge, either a
 TOtable.F(theta, theta.hat, t.cut, t.cut)$P
 TOtable.F(theta, total.score, t.cut, x.cut)$P 
 
-# for 1PL model total score is sufficient for theta.hat, repeat with 2PL or 3PL items to see effect of classifying on theta.hat instead of total score
+# for 1PL model total score is sufficient for theta.hat.
+# repeat with 2PL or 3PL items to see effect of classifying 
+# on theta.hat instead of total score
 }

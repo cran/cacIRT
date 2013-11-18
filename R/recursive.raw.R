@@ -1,5 +1,5 @@
 recursive.raw <-
-function(theta, ip){
+function(theta, ip, D = 1.7){
 	
 	ut <- theta
 	if (is.null(dim(ip))) 
@@ -11,7 +11,7 @@ function(theta, ip){
 	sc <- ni+1
 	
 	 	   
-		Pjt <-  irf(ip,ut)$f #needs irf()
+		Pjt <-  irf(ip, ut, D)$f #needs irf()
 		Qjt <-  1-Pjt
 		H <- apply(Qjt,1,prod)
 		Zjt	<- Pjt/Qjt

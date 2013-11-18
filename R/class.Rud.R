@@ -1,15 +1,15 @@
 class.Rud <-
-function( cutscore, ip, ability = NULL, se=NULL, rdm = NULL, quadrature=NULL){
+function( cutscore, ip, ability = NULL, se=NULL, rdm = NULL, quadrature=NULL, D = 1.7){
 	 	
 		if(is.null(quadrature)==TRUE){
 		if(is.null(ability)==TRUE){
 			
-			os <- MLE(rdm, ip)
-			se <- SEM(ip,os)} else{
+			os <- MLE(rdm, ip, D)
+			se <- SEM(ip,os, D)} else{
 			os <- ability
 			se <- se}
 	
-		results <- Rud.P(cutscore,os , se)
+		results <- Rud.P(cutscore, os, se)
 		results
 		
 		} else {

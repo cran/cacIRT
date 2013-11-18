@@ -13,16 +13,16 @@
 A collection of useful IRT functions.
 }
 \description{
-Most are modified from the package irtoys, using a scaling of 1.7 is used (so that logistic models approximate the normal ogive).
+Most are modified from the package \code{irtoys}.
 }
 \usage{
-iif(ip, x)
-irf(ip, x)
-MLE(resp, ip)
+iif(ip, x, D = 1.7)
+irf(ip, x, D = 1.7)
+MLE(resp, ip, D = 1.7)
 normal.qu(n = 15, lower = -4, upper = 4, mu = 0, sigma = 1)
-SEM(ip, x)
-sim(ip, x)
-tif(ip, x)
+SEM(ip, x, D = 1.7)
+sim(ip, x, D = 1.7)
+tif(ip, x, D = 1.7)
 }
 
 
@@ -35,17 +35,13 @@ A Jx3 matrix of item parameters. Columns are discrimination, difficulty, and gue
 \item{n}{Number of quadrature points wanted}
 \item{lower, upper}{Range of points wanted}
 \item{mu, sigma}{The normal distribution from which points and weights are taken}
+\item{D}{
+The scaling constant for the IRT parameters, defaults to 1.7, alternatively often set to 1.}
 }
 \details{
 \code{iif} give item information, \code{irf} gives item response function, \code{MLE} returns maximum likelihood estimates of theta (perfect scores get +-4), \code{normal.qu} returns a list length 2 of quadrature points and weights, \code{SEM} gives the inverse of the test information, \code{sim} returns simulated response matrix, \code{tif} gives the test information function.
 }
-\value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
-}
+
 \references{
 see R package \code{irtoys} for further details
 }
@@ -58,9 +54,7 @@ see R package \code{irtoys} for further details
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
-\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
-}
+
 \examples{
 params<-matrix(c(1,1,1,1,-2,1,0,1,0,0,0,0),4,3)
 rdm<-sim(params, rnorm(100))

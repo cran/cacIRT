@@ -9,7 +9,7 @@ function(theta,os,theta.cutoff,os.cutoff){
 			colnames(contab)<-c(paste("Obs <", round(o.cuts[(nc-1):1],2)),"margin")
 	
 		true.cat<-cut(theta,t.cuts,labels=FALSE,right=FALSE)
-		obs.cat<-cut(os,o.cuts,labels=FALSE,,right=FALSE)
+		obs.cat<-cut(os,o.cuts,labels=FALSE,right=FALSE)
 	
 			for(i in 1:(nc-1)) for(j in 1:(nc-1))
 				contab[i,j]<-length((which(true.cat[obs.cat==j]==i)))

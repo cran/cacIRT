@@ -1,6 +1,6 @@
 sim <-
-function(ip,x){
-	    i = irf(ip, x)
+function(ip, x, D = 1.7){
+	    i = irf(ip, x, D)
     	d = dim(i$f)
    		u = runif(d[1] * d[2])
     	dim(u) = d

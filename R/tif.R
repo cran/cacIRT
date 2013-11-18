@@ -1,7 +1,7 @@
 tif <-
-function (ip, x) 
+function (ip, x, D = 1.7) 
 	{
-	    i = iif(ip, x)
+	    i = iif(ip, x, D)
 	    if (is.null(dim(i$f))) 
 	        dim(i$f) = c(length(i$x), length(i$f))
 	    f = apply(i$f, 1, sum)

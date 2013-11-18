@@ -13,7 +13,7 @@ Computes classification accuracy and consistency with Rudner's approach. For eac
 
 }
 \usage{
-class.Rud(cutscore, ip, ability = NULL, se = NULL, rdm = NULL, quadrature = NULL)
+class.Rud(cutscore, ip, ability = NULL, se = NULL, rdm = NULL, quadrature = NULL, D = 1.7)
 Rud.D(cutscore, quadrature, sem)
 Rud.P(cutscore, os, sem)
 }
@@ -43,6 +43,9 @@ The response data matrix with rows as subjects and columns as items
 %%     ~~Describe \code{quadrature} here~~
 A list containing 1) The quadrature points and 2) Their corresponding weigths
 }
+\item{D}{
+The scaling constant for the IRT parameters, defaults to 1.7, alternatively often set to 1.
+}
 }
 \details{
 %%  ~~ If necessary, more details than the description above ~~
@@ -51,7 +54,7 @@ Must give only ability and se, rdm, or quadrature. If ability and se are given, 
 \value{
 %%  ~Describe the value returned
 %%  If it is a LIST, use
-\item{Marginal }{A matrix with two columns of marginal accuracy and consistency per cut score and/or simultaneous}
+\item{Marginal}{A matrix with two columns of marginal accuracy and consistency per cut score and/or simultaneous}
 \item{Conditional }{A matrix of conditional accuracy and conditional consistency returned in the order of subjects if ability or rdm is given}
 %% ...
 }
@@ -66,17 +69,12 @@ Rudner, L. M. (2005) Expected classification accuracy. Practical Assessment Rese
 }
 \note{
 %%  ~~further notes~~
-\code{class.Rud} is a wrapper for \code{Rud.P} and \code{Rud.D}. 
-
-To expand the code  to other IRT models for example, the code within \code{Rud.P} or \code{Rud.D} may need to be modified. If you can supply the theta estimates and their se's (which are conditionally normal), then the function should work as is.
-
+\code{class.Rud} is a wrapper for \code{Rud.P} and \code{Rud.D}.
 }
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
-\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
-}
+
 \examples{
 ##from rdm, item parameters denote 4 item 1PL test, cut score at theta=.5
 ##only return marginal indices
@@ -90,7 +88,7 @@ class.Rud(.5, params, rdm = rdm)$Marginal
 
 quad <- normal.qu(40)
 
-class.Rud(c(-.5,1.5), params, quadrature = quad)$Marginal
+class.Rud(c(-.5,1.5), params, quadrature = quad, D = 1)$Marginal
 
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

@@ -1,7 +1,7 @@
 SEM <-
-function(ip,x)
+function(ip,x, D = 1.7)
 	{
-		ti<-tif(ip, x)$f	
+		ti<-tif(ip, x, D)$f	
    		sem <- sqrt(1/ti)
    		return(sem)
    	}

@@ -7,7 +7,7 @@ Recursive computation of conditional total score
 \description{
 Returns probabilities of each possible total score conditional on theta}
 \usage{
-recursive.raw(theta, ip)
+recursive.raw(theta, ip, D = 1.7)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -15,12 +15,13 @@ recursive.raw(theta, ip)
 Vector of ability estimates or points to condition on.
 }
   \item{ip}{
-Jx3 matrix of item parameters, columns are discrimination, difficulty, and guessing.
+Jx3 matrix of item parameters, columns are discrimination, difficulty, and guessing; in that order.
+}
+\item{D}{
+The scaling constant for the IRT parameters, defaults to 1.7, alternatively often set to 1.
 }
 }
-\details{
-%%  ~~ If necessary, more details than the description above ~~
-}
+
 \value{
 %%  ~Describe the value returned
 %%  If it is a LIST, use
@@ -29,21 +30,17 @@ Jx3 matrix of item parameters, columns are discrimination, difficulty, and guess
 %% ...
 A matrix of theta points by possible score 0,1, . . . ,J.
 }
-\references{
-%% ~put references to the literature/web site here ~
-}
+
 \author{
 Quinn Lathrop
 }
 \note{
-As described in Huynh 1990
+As described in Huynh 1990. I have code available for the polytomous generalization of this algorithm. 
 }
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
-\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
-}
+
 \examples{
 params<-matrix(c(1,1,1,1,-2,1,0,1,0,0,0,0),4,3)
 rec.mat <- recursive.raw(c(-1,0,1), params)}
