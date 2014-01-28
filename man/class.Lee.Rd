@@ -2,6 +2,7 @@
 \alias{class.Lee}
 \alias{Lee.D}
 \alias{Lee.P}
+\alias{Lee.poly.P}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 
@@ -16,6 +17,7 @@ Computes classification accuracy and consistency with Lee's approach. The probab
 class.Lee(cutscore, ip, ability = NULL, rdm = NULL, quadrature = NULL, D = 1.7)
 Lee.D(cutscore, quadrature, ip, D = 1.7)
 Lee.P(cutscore, theta, ip, D = 1.7)
+Lee.poly.P(cutscore, theta, Pij)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -43,11 +45,17 @@ A list containing 1) The quadrature points and 2) Their corresponding weights
 \item{D}{
 Scaling constant for IRT parameters, defaults to 1.7, alternatively often set to 1.
 }
+
+\item{Pij}{
+An array with N rows, nk (maximum number of options) columns, and I slices giving the probabilites Prob(X_i = x_i | theta_p) Each element is the probability that person n produces that column response for the item i. For binary response the dimensions would be Nx2xI, for a 5 category responses (coded 0,1,2,3,4), it would be Nx5xI). For mixed tests, have the number of columns equal the max number of categories and prob(x=4|theta)
+}
  
 }
 \details{
 %%  ~~ If necessary, more details than the description above ~~
  Must give only one ability, rdm, or quadrature. If ability is given, those scores are used for the P method. If rdm is given, ability is estimated with MLE (perfect response patterns given a -4 or 4) and used for the P method. If quadrature, the D method is used. \code{class.Lee} calls \code{Lee.D} or \code{Lee.P}.
+ 
+For \code{Lee.poly.P}, user provides the array Pij, the cutscores, and the ability. Pij can be created from most IRT models or mixed tests.
 }
 \value{
 %%  ~Describe the value returned
@@ -85,6 +93,15 @@ quad <- normal.qu(40)
 
 class.Lee(c(2,3), params, quadrature = quad, D = 1)$Marginal
 
+#example of Lee.poly.P with same binary responses
+theta.hat <- MLE(rdm, params)
+Pij <- array(NA,dim = c(100,2,4))
+
+Pi1 <- irf(params, theta.hat)$f
+Pij[,2,] <- Pi1
+Pij[,1,] <- 1-Pi1
+
+Lee.poly.P(c(2,3), theta.hat, Pij)$Marginal
 
 }
 

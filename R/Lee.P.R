@@ -13,7 +13,7 @@ function(cutscore,theta,ip, D = 1.7){
 							(1 - ip[i,3])/(1 + exp(-D*ip[i, 1] * 
 							(ut-ip[i, 2])))))   
 	
-rec.mat <- recursive.raw(ut,ip)
+rec.mat <- recursive.raw(ut,ip,D)
 	
 	esacc <- escon <-matrix(NA,nc,nn, dimnames = list(paste("cut at",cutscore), round(ut,3)))
 
@@ -47,8 +47,7 @@ rec.mat <- recursive.raw(ut,ip)
 			for(i in 1:(nc+1)){
 				what <- what + rowSums(rec.s[[i]])^2}
 			simul[,2]<-what
-			
-				
+							
 			
 				ans<- (list("Marginal" = rbind(cbind("Accuracy" = rowMeans(esacc), "Consistency" = rowMeans(escon)), "Simultaneous" = colMeans(simul)), "Conditional" = list("Accuracy" =cbind(t(esacc), "Simultaneous" =simul[,1]), "Consistency" = cbind(t(escon),"Simultaneous" =simul[,2]))))
 				ans
@@ -56,10 +55,7 @@ rec.mat <- recursive.raw(ut,ip)
 				
 				ans<- (list("Marginal" = cbind("Accuracy" = rowMeans(esacc), "Consistency" = rowMeans(escon)), "Conditional" = list("Accuracy" =t(esacc), "Consistency" = t(escon))))
 				
-				
-				
 			
-			#print(list("Marinal Accuracy" = round(rowMeans(esacc),4), "Marginal Consistency"=round(rowMeans(escon),4)))
  
  ans
 	}

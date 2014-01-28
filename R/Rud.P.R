@@ -1,7 +1,7 @@
 Rud.P <-
 function(cutscore, os, sem) 
 	 { 
-	 	nn<-length(os)
+	 	nn <- length(os)
 	 	nc <- length(cutscore)
 	 	
 	 	if(nn != length(sem)) stop("Ability and se of different length")
@@ -10,7 +10,7 @@ function(cutscore, os, sem)
 		escon <-esacc
 		for(j in 1:length(cutscore)){
 			cuts<-c(-Inf, cutscore[j], Inf)		 	
-	 		categ<-cut(os,cuts,labels=FALSE,right=FALSE)
+	 		categ<-cut(os,cuts,labels=FALSE)
 			
 		for(i in 1:nn) {
 			esacc[j,i]<-(pnorm(cuts[categ[i]+1],os[i],sem[i])-pnorm(cuts[categ[i]],os[i],sem[i]))
@@ -24,7 +24,7 @@ function(cutscore, os, sem)
 				
 				simul <- matrix(NA,nn, 2, dimnames = list(round(os,3), c("Accuracy", "Consistency")))
 				cuts <- c(-Inf, cutscore, Inf)
-				categ<-cut(os,cuts,labels=FALSE,right=FALSE)
+				categ<-cut(os,cuts,labels=FALSE)
 				
 				for(i in 1:nn){
 					simul[i,1] <- (pnorm(cuts[categ[i]+1],os[i],sem[i])-pnorm(cuts[categ[i]],os[i],sem[i]))

@@ -10,8 +10,8 @@ function(cutscore, quadrature, sem)
 		esacc <- escon <-matrix(NA,length(cutscore), nn, dimnames = list(paste("cut at",cutscore), round(os,3)))
 		
 		for(j in 1:length(cutscore)){
-			cuts<-c(-Inf, cutscore[j], Inf)		 	
-	 		categ<-cut(os,cuts,labels=FALSE,right=FALSE)
+			cuts <-c(-Inf, cutscore[j], Inf)		 	
+	 		categ<-cut(os,cuts,labels=FALSE)
 			
 		for(i in 1:nn) {
 			esacc[j,i]<-(pnorm(cuts[categ[i]+1],os[i],sem[i])-pnorm(cuts[categ[i]],os[i],sem[i]))
@@ -24,7 +24,7 @@ function(cutscore, quadrature, sem)
 			ans} else{
 				simul <- matrix(NA,nn, 2, dimnames = list(round(os,3), c("Accuracy", "Consistency")))
 				cuts <- c(-Inf, cutscore, Inf)
-				categ<-cut(os,cuts,labels=FALSE,right=FALSE)
+				categ<-cut(os,cuts,labels=FALSE)
 				
 				for(i in 1:nn){
 					simul[i,1] <- (pnorm(cuts[categ[i]+1],os[i],sem[i])-pnorm(cuts[categ[i]],os[i],sem[i]))

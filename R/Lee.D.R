@@ -14,7 +14,7 @@ function(cutscore, quadrature, ip, D = 1.7){
 							(1 - ip[i,3])/(1 + exp(-D*ip[i, 1] * 
 							(ut-ip[i, 2])))))   
 	
-	rec.mat <- recursive.raw(ut,ip)
+	rec.mat <- recursive.raw(ut,ip,D)
 	
 	esacc <- escon <-matrix(NA,nc,nn, dimnames = list(paste("cut at",cutscore), round(ut,3)))
 
