@@ -13,12 +13,12 @@
 A collection of useful IRT functions.
 }
 \description{
-Most are modified from the package \code{irtoys}.
+Modified from the package \code{irtoys}.
 }
 \usage{
 iif(ip, x, D = 1.7)
 irf(ip, x, D = 1.7)
-MLE(resp, ip, D = 1.7)
+MLE(resp, ip, D = 1.7, min= -4, max = 4)
 normal.qu(n = 15, lower = -4, upper = 4, mu = 0, sigma = 1)
 SEM(ip, x, D = 1.7)
 sim(ip, x, D = 1.7)
@@ -32,6 +32,7 @@ tif(ip, x, D = 1.7)
 A Jx3 matrix of item parameters. Columns are discrimination, difficulty, and guessing}
   \item{x}{Vector of theta points}
 \item{resp}{Response data matrix, subjects by items}
+\item{min, max}{MLE is undefined for perfect scores. These parameters define the range in which to search for the MLE, if the score is perfect, the min or max will be returned.}
 \item{n}{Number of quadrature points wanted}
 \item{lower, upper}{Range of points wanted}
 \item{mu, sigma}{The normal distribution from which points and weights are taken}
@@ -39,18 +40,17 @@ A Jx3 matrix of item parameters. Columns are discrimination, difficulty, and gue
 The scaling constant for the IRT parameters, defaults to 1.7, alternatively often set to 1.}
 }
 \details{
-\code{iif} give item information, \code{irf} gives item response function, \code{MLE} returns maximum likelihood estimates of theta (perfect scores get +-4), \code{normal.qu} returns a list length 2 of quadrature points and weights, \code{SEM} gives the inverse of the test information, \code{sim} returns simulated response matrix, \code{tif} gives the test information function.
+\code{iif} gives item information, \code{irf} gives item response function, \code{MLE} returns maximum likelihood estimates of theta (perfect scores get +-4), \code{normal.qu} returns a list length 2 of normal quadrature points and weights, \code{SEM} gives the standard error of measurement at the given ability points, \code{sim} returns simulated response matrix, \code{tif} gives the test information function.
 }
 
 \references{
-see R package \code{irtoys} for further details
+Partchev, I. (2014) irtoys: Simple interface to the estimation and plotting of IRT models. R package version 0.1.7.
+
 }
 \author{
-Quinn Lathrop
+Quinn N. Lathrop
 }
-\note{
-see R package \code{irtoys} for further details
-}
+
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 

@@ -1,4 +1,6 @@
 # Remove the previous line if you edit this file
-
+importFrom("graphics", "hist")
+importFrom("stats", "bw.nrd", "dnorm", "optimize", "pnorm", "runif",
+           "weighted.mean")
 # Export all names that dont start with a period
 exportPattern("^[^\\.]")

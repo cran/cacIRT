@@ -1,8 +1,9 @@
-Lee.poly.P <-function(cutscore, Pij, theta)	 {
+Lee.poly.D <-function(cutscore, Pij, quadrature)	 {
   
-  ut <- theta
+  ut <- quadrature[[1]]
+  we <- quadrature[[2]]
   nn <- length(ut)
-  nk <- dim(Pij)[2]	
+  nk <- dim(Pij)[2]
   ni <- dim(Pij)[3]
   sc <- ni + 1
   nc <- length(cutscore)
@@ -43,15 +44,13 @@ Lee.poly.P <-function(cutscore, Pij, theta)	 {
       what <- what + rowSums(rec.s[[i]])^2
     }
     simul[, 2] <- what
-    ans <- (list(Marginal = rbind(cbind(Accuracy = rowMeans(esacc), 
-                                        Consistency = rowMeans(escon)), Simultaneous = colMeans(simul)), 
-                 Conditional = list(Accuracy = cbind(t(esacc), Simultaneous = simul[, 
-                                                                                    1]), Consistency = cbind(t(escon), Simultaneous = simul[,2]))))
+    
+    ans<- (list("Marginal" = rbind(cbind("Accuracy" = apply(esacc,1,weighted.mean,we), "Consistency" = apply(escon,1,weighted.mean,we)), "Simultaneous" = apply(simul,2,weighted.mean,we) ), "Conditional" = list("Accuracy" =cbind(t(esacc), "Simultaneous" =simul[,1]), "Consistency" = cbind(t(escon),"Simultaneous" =simul[,2]))))
+    
     ans
   }
-  else ans <- (list(Marginal = cbind(Accuracy = rowMeans(esacc), 
-                                     Consistency = rowMeans(escon)), Conditional = list(Accuracy = t(esacc), 
-                                                                                        Consistency = t(escon))))
+  
+  else ans<- (list("Marginal" = cbind("Accuracy" = apply(esacc,1,weighted.mean,we), "Consistency" = apply(escon,1,weighted.mean,we)), "Conditional" = list("Accuracy" =t(esacc), "Consistency" = t(escon))))	
   ans
   
 }

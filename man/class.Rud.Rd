@@ -15,7 +15,7 @@ Computes classification accuracy and consistency with Rudner's approach. For eac
 \usage{
 class.Rud(cutscore, ip, ability = NULL, se = NULL, rdm = NULL, quadrature = NULL, D = 1.7)
 Rud.D(cutscore, quadrature, sem)
-Rud.P(cutscore, os, sem)
+Rud.P(cutscore, theta, sem)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -27,7 +27,7 @@ A scalar or vector of cut scores on the theta scale. Should not include +- inf, 
 %%     ~~Describe \code{ip} here~~
 Matrix of item parameters, columns are discrimination, difficultly, guessing. For 1PL and 2PL, still give a Jx3 matrix, with \code{ip[,1] = 1} and \code{ip[,3] = 0} for example.
 }
-  \item{ability, os}{
+  \item{ability, theta}{
 %%     ~~Describe \code{ability} here~~
 Ability estimates for each subject.
 }
@@ -41,7 +41,7 @@ The response data matrix with rows as subjects and columns as items
 }
   \item{quadrature}{
 %%     ~~Describe \code{quadrature} here~~
-A list containing 1) The quadrature points and 2) Their corresponding weigths
+A list containing [[1]] The quadrature points and [[2]] Their corresponding weights
 }
 \item{D}{
 The scaling constant for the IRT parameters, defaults to 1.7, alternatively often set to 1.
@@ -55,12 +55,12 @@ Must give only ability and se, rdm, or quadrature. If ability and se are given, 
 %%  ~Describe the value returned
 %%  If it is a LIST, use
 \item{Marginal}{A matrix with two columns of marginal accuracy and consistency per cut score and/or simultaneous}
-\item{Conditional }{A matrix of conditional accuracy and conditional consistency returned in the order of subjects if ability or rdm is given}
+\item{Conditional}{A list of two matrixes, one for conditional accuracy and  one for conditional consistency. Each matrix has one row per subject (or quadrature point).}
 %% ...
 }
 \references{
 %% ~put references to the literature/web site here ~
-Rudner, L. M. (2001) Computing the expected proportions of misclassified examinees. PracticalAssessment, Research & Evaluation, \bold{7(14)}, 1--5. 
+Rudner, L. M. (2001) Computing the expected proportions of misclassified examinees. Practical Assessment, Research & Evaluation, \bold{7(14)}, 1--5. 
 
 Rudner, L. M. (2005) Expected classification accuracy. Practical Assessment Research & Evaluation, \bold{10(13)}, 1--4.
 }
